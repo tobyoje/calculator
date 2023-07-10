@@ -12,12 +12,13 @@
 
 .calculator-header {
   width: 30rem;
+  //   height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   background-color: #710c0c;
   border-radius: 1rem 1rem 0 0;
-  padding: 0 4rem 4rem 4rem;
+  padding: 0 4rem 6rem 4rem;
 
   @include media-tablet {
     width: 60rem;
@@ -34,7 +35,16 @@
     margin-bottom: 3rem;
   }
 
-  &__input{
+  &__input {
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__result {
+    font-size: 3rem;
     display: flex;
     justify-content: flex-end;
     color: white;
@@ -78,16 +88,15 @@
       background-color: black;
     }
     &--num-light {
-        background-color: white;
-        color: black;
-
-      }
+      background-color: white;
+      color: black;
+    }
     &--equals {
       background-color: #710c0c;
     }
     &--light {
-        background-color: #F0F0F0;
-        color: black;
+      background-color: #f0f0f0;
+      color: black;
     }
   }
 }

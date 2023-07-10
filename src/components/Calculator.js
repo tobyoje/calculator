@@ -5,13 +5,38 @@ const Calculator = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [circleColor, setCircleColor] = useState("calculator-main__circle");
   const [numColor, setNumColor] = useState("calculator-main__circle--num");
-  const [calcInput, setCalcInput] = useState();
-  const [calcOperator, setCalcOperator] = useState();
+  const [calcInput, setCalcInput] = useState("");
+  //   const [calcInput2, setCalcInput2] = useState("");
+  const [calcOperator, setCalcOperator] = useState("");
+  const [calcResult, setCalcResult] = useState("");
 
+  const userInput = "";
 
   const solve = () => {
-    (calcInput) (calcOperator) (calcInput)
-  }
+    // const num1 = parseFloat(calcInput1);
+    // const num2 = parseFloat(calcInput2);
+    const [num1, num2] = calcInput.split(calcOperator).map(parseFloat);
+
+    let result;
+    switch (calcOperator) {
+      case "+":
+        result = num1 + num2;
+        break;
+      case "-":
+        result = num1 - num2;
+        break;
+      case "*":
+        result = num1 * num2;
+        break;
+      case "/":
+        result = num1 / num2;
+        break;
+      default:
+        result = "";
+    }
+
+    setCalcResult(result);
+  };
 
   const changeMode = () => {
     if (darkMode) {
@@ -24,6 +49,30 @@ const Calculator = () => {
       setNumColor("calculator-main__circle--num");
     }
     console.log("now");
+  };
+
+  const handleNumClick = (value) => {
+    setCalcInput((prevInput) => prevInput + value);
+  };
+
+  const handleOperatorClick = (operator) => {
+    setCalcOperator(operator);
+    setCalcInput((prevValue) => prevValue + " " + operator + " ");
+  };
+
+  const handlePlusMinus = () => {
+    setCalcInput((prevValue) => {
+      if (prevValue[0] === "-") {
+        return prevValue.slice(1);
+      } else {
+        return "-" + prevValue;
+      }
+    });
+  };
+
+  const handleClear = () => {
+    setCalcInput("");
+    setCalcResult("");
   };
 
   return (
@@ -48,7 +97,8 @@ const Calculator = () => {
               />
             </svg>
           </div>
-          <div className="calculator-header__input">49 + 1</div>
+          <div className="calculator-header__input">{calcInput}</div>
+          <div className="calculator-header__result">{calcResult}</div>
         </div>
 
         <div
@@ -56,38 +106,121 @@ const Calculator = () => {
           style={{ backgroundColor: !darkMode ? "white" : "black" }}
         >
           <div className="calculator-main__container">
-            <div className={`calculator-main__circle ${circleColor}`}>C</div>
-            <div className={`calculator-main__circle ${circleColor}`}>+/-</div>
-            <div className={`calculator-main__circle ${circleColor}`}>%</div>
-            <div className={`calculator-main__circle ${circleColor}`}>÷</div>
+            <div
+              className={`calculator-main__circle ${circleColor}`}
+              onClick={handleClear}
+            >
+              C
+            </div>
+            <div className={`calculator-main__circle ${circleColor}`} onClick={handlePlusMinus}>+/-</div>
+            <div className={`calculator-main__circle ${circleColor}`}  onClick={() => handleOperatorClick("%")}>%</div>
+            <div
+              className={`calculator-main__circle ${circleColor}`}
+              onClick={() => handleOperatorClick("/")}
+            >
+              ÷
+            </div>
           </div>
 
           <div className="calculator-main__container">
-            <div className={`calculator-main__circle ${numColor}`}>7</div>
-            <div className={`calculator-main__circle ${numColor}`}>8</div>
-            <div className={`calculator-main__circle ${numColor}`}>9</div>
-            <div className={`calculator-main__circle ${circleColor}`}>x</div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("7")}
+            >
+              7
+            </div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("8")}
+            >
+              8
+            </div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("9")}
+            >
+              9
+            </div>
+            <div
+              className={`calculator-main__circle ${circleColor}`}
+              onClick={() => handleOperatorClick("*")}
+            >
+              x
+            </div>
           </div>
 
           <div className="calculator-main__container">
-            <div className={`calculator-main__circle ${numColor}`}>4</div>
-            <div className={`calculator-main__circle ${numColor}`}>5</div>
-            <div className={`calculator-main__circle ${numColor}`}>6</div>
-            <div className={`calculator-main__circle ${circleColor}`}>-</div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("4")}
+            >
+              4
+            </div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("5")}
+            >
+              5
+            </div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("6")}
+            >
+              6
+            </div>
+            <div
+              className={`calculator-main__circle ${circleColor}`}
+              onClick={() => handleOperatorClick("-")}
+            >
+              -
+            </div>
           </div>
 
           <div className="calculator-main__container">
-            <div className={`calculator-main__circle ${numColor}`}>1</div>
-            <div className={`calculator-main__circle ${numColor}`}>2</div>
-            <div className={`calculator-main__circle ${numColor}`}>3</div>
-            <div className={`calculator-main__circle ${circleColor}`}>+</div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("1")}
+            >
+              1
+            </div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("2")}
+            >
+              2
+            </div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("3")}
+            >
+              3
+            </div>
+            <div
+              className={`calculator-main__circle ${circleColor}`}
+              onClick={() => handleOperatorClick("+")}
+            >
+              +
+            </div>
           </div>
 
           <div className="calculator-main__container">
-            <div className={`calculator-main__circle ${numColor}`}>0</div>
-            <div className={`calculator-main__circle ${numColor}`}>.</div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick("0")}
+            >
+              0
+            </div>
+            <div
+              className={`calculator-main__circle ${numColor}`}
+              onClick={() => handleNumClick(".")}
+            >
+              .
+            </div>
             <div className={`calculator-main__circle ${numColor}`}></div>
-            <div className="calculator-main__circle calculator-main__circle--equals">
+            <div
+              className="calculator-main__circle calculator-main__circle--equals"
+              onClick={solve}
+            >
               =
             </div>
           </div>
