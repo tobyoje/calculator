@@ -1,9 +1,10 @@
-import './App.scss';
+import "./App.scss";
+import Calculator from "./components/Calculator";
 
 function App() {
   return (
-    <div className="App">
-     Hello
+    <div className="app">
+      <Calculator />
     </div>
   );
 }
